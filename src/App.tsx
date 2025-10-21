@@ -1,15 +1,7 @@
 import { useEffect, useState } from "react";
-
+import  { type Meal, type MealSummary } from "./types";
 import "./App.css";
 
-interface Meal {
-  idMeal: string;
-  strMeal: string;
-  strMealThumb: string;
-  strInstructions: string;
-  [key: `strIngredient${number}`]: string | null;
-  [key: `strMeasure${number}`]: string | null;
-}
 
 function App() {
   const [meals, setMeals] = useState<Meal[]>([]);
