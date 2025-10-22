@@ -54,6 +54,22 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.meal-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.meal-image {
+  width: 350px;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.ingredients-list {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
