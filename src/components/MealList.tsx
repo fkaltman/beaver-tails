@@ -4,42 +4,42 @@ import { type Meal } from "../types";
 import MealItem from "./MealItem";
 import { fetchMeals, fetchMealDetails } from "../api/meals";
 
-export default function MealList( ) {
+export default function MealList() {
   const [meals, setMeals] = React.useState<Meal[]>([]);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
 
-  async function loadMeals() {
-    try {
-      setLoading(true);
-      setError(null);
-      const summaries = await fetchMeals();
-      const details: Meal[] = [];
-
-      for (const summary of summaries) {
-        const meal = await fetchMealDetails(summary.idMeal);
-        details.push(meal);
-      }
-
-      setMeals(details);
-    } catch (e) {
-      setError("Failed to load meals");
-      console.error(e);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   useEffect(() => {
+    async function loadMeals() {
+      try {
+        setLoading(true);
+        setError(null);
+        const summaries = await fetchMeals();
+        const details: Meal[] = [];
+
+        for (const summary of summaries) {
+          const meal = await fetchMealDetails(summary.idMeal);
+          details.push(meal);
+        }
+
+        setMeals(details);
+      } catch (e) {
+        setError("Failed to load meals");
+        console.error("Error loading meals:", e);
+      } finally {
+        setLoading(false);
+      }
+    }
+
     loadMeals();
   }, []);
 
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
-  if (loading) return <p>Loading meals...</p>; 
-  
+  // And for error/loading:
+  if (error) return <p className="text-error">{error}</p>;
+  if (loading) return <p className="text-muted">Loading meals...</p>;
 
   return (
-    <ul style={{ listStyle: "none", padding: 0 }}>
+    <ul className="container">
       {meals.map((meal) => (
         <MealItem key={meal.idMeal} meal={meal} />
       ))}

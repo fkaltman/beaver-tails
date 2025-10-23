@@ -70,6 +70,21 @@ button:focus-visible {
   padding-left: 1.5rem;
 }
 
+.container {
+  list-style: none;
+  padding: 0;
+}
+
+.text-error {
+  color: red;
+}
+
+.text-muted {
+  color: #666;
+}
+
+
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
